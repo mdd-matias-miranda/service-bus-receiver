@@ -1,6 +1,6 @@
 import { app, HttpRequest, HttpResponseInit, InvocationContext } from "@azure/functions";
 import { getServiceBusTopicReceiver, getServiceBusTopicSender } from "../ServiceBusClient";
-
+import { ServiceBusClient, ServiceBusReceiver } from "@azure/service-bus";
 
 const topicReceiver = getServiceBusTopicReceiver();
 console.log(topicReceiver);

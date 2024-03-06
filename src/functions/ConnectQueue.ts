@@ -4,18 +4,13 @@ import { getServiceBusQueueReceiver, getServiceBusQueueSender } from "../Service
 // receive from a queue
 const queueReceiver = getServiceBusQueueReceiver();
 console.log(queueReceiver);
+
 // Subscribe to messages of the queue
-queueReceiver.subscribe({
-    processMessage: async (message) => {
-        console.log(`Received message: ${message.body}`);
-
-        //call the topic to send it as locked
-
-        // Complete the message to remove it from the queue
-        await queueReceiver.completeMessage(message);
-    },
-    processError: async (err) => {
-        console.error("Error occurred:", err);
+app.serviceBusQueue('serviceBusTopicTrigger1', {
+    connection:  'SERVICE_BUS_CONNECTION_STRING',
+    queueName:  'mdd-bus-queue',
+    handler: (message, context) => {
+    context.log('Service bus topic function processed message:', message);
     }
 });
 
